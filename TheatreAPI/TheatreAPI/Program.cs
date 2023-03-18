@@ -21,6 +21,7 @@ builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<ITheathreRepository, TheathreRepository>();
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 
 builder.Services.AddScoped<IUserBL, UserBL>();
 builder.Services.AddScoped<IActorBL, ActorBL>();
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IUserRoleBL, UserRoleBL>();
 builder.Services.AddScoped<IAddressBL, AddressBL>();
 builder.Services.AddScoped<IEventBL, EventBL>();
 builder.Services.AddScoped<ITheathreBL, TheathreBL>();
+builder.Services.AddScoped<ITicketBL, TicketBL>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
