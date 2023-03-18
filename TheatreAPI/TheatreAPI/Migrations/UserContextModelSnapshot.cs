@@ -111,13 +111,35 @@ namespace TheatreAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TheatreAPI.Models.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("TheatreAPI.Models.Actor", b =>
@@ -136,6 +158,17 @@ namespace TheatreAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("TheatreAPI.Models.User", b =>
+                {
+                    b.HasOne("TheatreAPI.Models.UserRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("TheatreAPI.Models.Play", b =>
