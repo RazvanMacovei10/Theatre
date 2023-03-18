@@ -13,6 +13,8 @@ namespace TheatreAPI.Repository
 
         public DbSet<User> Users { get; set; }
         public DbSet<Actor> Actors { get; set; }
+        public DbSet<PlayType> PlayTypes { get; set; }
+        public DbSet<Play> Plays { get; set; }
 
     }
 }
