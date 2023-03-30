@@ -28,7 +28,10 @@ namespace TheatreAPI.Controllers
             {
                 return BadRequest("Username is taken");
             }
-
+            if (await _userBL.UserExistsByEmail(registerDTO.Email))
+            {
+                return BadRequest("Email is taken");
+            }
             using var hmac = new HMACSHA512();
 
             var user = new User()
@@ -36,7 +39,7 @@ namespace TheatreAPI.Controllers
                 Username = registerDTO.Username.ToLower(),
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
                 PasswordSalt = hmac.Key,
-                Email = "emailrandom",
+                Email = registerDTO.Email.ToLower(),
                 RoleId = 1
             };
             _userBL.CreateAsync(user);
