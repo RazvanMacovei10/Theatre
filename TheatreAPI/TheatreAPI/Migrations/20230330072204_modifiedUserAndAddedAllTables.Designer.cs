@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheatreAPI.Repository;
 
@@ -11,9 +12,11 @@ using TheatreAPI.Repository;
 namespace TheatreAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20230330072204_modifiedUserAndAddedAllTables")]
+    partial class modifiedUserAndAddedAllTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,12 +125,12 @@ namespace TheatreAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeId")
+                    b.Property<int>("PlayTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TypeId");
+                    b.HasIndex("PlayTypeId");
 
                     b.ToTable("Plays");
                 });
@@ -217,9 +220,13 @@ namespace TheatreAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.Property<byte[]>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -282,7 +289,7 @@ namespace TheatreAPI.Migrations
                 {
                     b.HasOne("TheatreAPI.Models.PlayType", "Type")
                         .WithMany()
-                        .HasForeignKey("TypeId")
+                        .HasForeignKey("PlayTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

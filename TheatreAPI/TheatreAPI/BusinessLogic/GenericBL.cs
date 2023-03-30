@@ -1,19 +1,20 @@
-﻿using TheatreAPI.IBusinessLogic;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatreAPI.IBusinessLogic;
 using TheatreAPI.Repository;
 
 namespace TheatreAPI.BusinessLogic
 {
     public class GenericBL<TRepository,TEntity> : IGenericBL<TEntity> where TRepository : IGenericRepository<TEntity>
     {
-        private readonly IGenericRepository<TEntity> Repository;
+        private readonly IGenericRepository<TEntity> _repository;
         public GenericBL(TRepository repository)
         {
-            Repository = repository;
+            _repository = repository;
         }
 
         public Task<TEntity> CreateAsync(TEntity entity)
         {
-           return Repository.CreateAsync(entity);
+           return _repository.CreateAsync(entity);
         }
 
         public Task<bool> DeleteAsync(int id)
@@ -21,9 +22,11 @@ namespace TheatreAPI.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public Task<IList<TEntity>> GetAllAsync()
+        public async Task<IList<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var results = await _repository.GetAllAsync();
+
+            return results;
         }
 
         public Task<TEntity> GetByIdAsync(int id)

@@ -1,4 +1,6 @@
-﻿namespace TheatreAPI.Repository
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TheatreAPI.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
@@ -32,15 +34,18 @@
             throw new NotImplementedException();
         }
 
-        public Task<IList<TEntity>> GetAllAsync()
+        public async Task<IList<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Couldn't receive entities: " + ex.Message);
+            }
         }
 
-        public Task<TEntity> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<TEntity> UpdateAsync(TEntity entity)
         {

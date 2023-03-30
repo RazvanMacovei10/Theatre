@@ -4,8 +4,6 @@
     {
         Task<IList<TEntity>> GetAllAsync();
 
-        Task<TEntity> GetByIdAsync(int id);
-
         Task<TEntity> CreateAsync(TEntity entity);
 
         Task<TEntity> UpdateAsync(TEntity entity);
