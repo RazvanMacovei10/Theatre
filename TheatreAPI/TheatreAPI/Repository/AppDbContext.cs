@@ -20,6 +20,7 @@ namespace TheatreAPI.Repository
         public DbSet<Event> Events { get; set; }
         public DbSet<Theatre> Theatres { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<RegisterForm> RegisterForms { get; set; }
 
     }
 }

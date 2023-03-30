@@ -13,10 +13,12 @@ namespace TheatreAPI.Controllers
     {
         private readonly IUserBL _userBL;
         private readonly ITokenBL _tokenBL;
-        public AccountController(IUserBL userBL, ITokenBL tokenBL)
+        private readonly IRegisterFormBL _registerFormBL;
+        public AccountController(IUserBL userBL, ITokenBL tokenBL,IRegisterFormBL registerFormBL)
         {
             _userBL = userBL;
             _tokenBL = tokenBL;
+            _registerFormBL = registerFormBL;
         }
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
