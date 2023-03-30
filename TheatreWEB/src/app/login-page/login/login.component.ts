@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -8,10 +9,14 @@ import { AccountService } from 'src/app/_services/account.service';
 })
 export class LoginComponent implements OnInit {
 
+  isLoggedIn$:Observable<boolean>=new Observable<boolean>()
   model:any={}
-  constructor(public accountService:AccountService) { }
+  constructor(private accountService:AccountService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn$ = this.accountService.currentUser$.pipe(
+      map(user => !!user)
+    );
   }
 
   login(){
@@ -25,5 +30,4 @@ export class LoginComponent implements OnInit {
   logout(){
     this.accountService.logout();
   }
-
 }

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <form *ngIf="!(accountService.currentUser$|async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off"> 
+        <form *ngIf="!(isLoggedIn$|async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off"> 
             <input name="username"
             [(ngModel)]="model.username"
              class="form-control me-2" 
@@ -15,9 +15,10 @@
             placeholder="Password"> 
             <button class="btn btn-outline-success" type="submit">Login</button> 
         </form> 
-        <div *ngIf="accountService.currentUser$|async">
-                <a (click)="logout()">Logout</a>
+        <div *ngIf="isLoggedIn$|async">
+          <a (click)="logout()">Logout</a>
         </div>
+        
       </div>
     </div>
   </div>
