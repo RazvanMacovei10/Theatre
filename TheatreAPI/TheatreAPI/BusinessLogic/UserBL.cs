@@ -29,6 +29,10 @@ namespace TheatreAPI.BusinessLogic
         {
             return await _context.Users.AnyAsync(x => x.Username == username.ToLower());
         }
+        public async Task<bool> UserExistsByEmail(string email)
+        {
+            return await _context.Users.AnyAsync(x => x.Email == email.ToLower());
+        }
 
         public async Task<User> GetByUsername(string username)
         {

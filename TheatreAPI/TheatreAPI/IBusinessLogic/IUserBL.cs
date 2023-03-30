@@ -9,5 +9,6 @@ namespace TheatreAPI.IBusinessLogic
         public Task<bool> UserExists(string username);
 
         public Task<User> GetByUsername(string username);
+        public Task<bool> UserExistsByEmail(string email);
     }
 }
