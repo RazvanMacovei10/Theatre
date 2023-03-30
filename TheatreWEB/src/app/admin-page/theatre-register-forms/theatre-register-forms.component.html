@@ -2,6 +2,9 @@
     <span class="username">{{registerForm.username}}</span>
     <p class="address">{{registerForm.address.city +' '+ registerForm.address.street+' ' + registerForm.address.number}}</p>
     <p class="total-seats">{{registerForm.totalSeats}}</p>
+    <img [src]="byteArrayToImageUrl()" alt="Converted Image">
+    <div>
     <button class="approve-button">Approve</button>
     <button class="delete-button">Delete</button>
+</div>
 </div>

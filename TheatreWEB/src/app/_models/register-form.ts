@@ -4,5 +4,6 @@ export interface RegisterForm{
     id: number,
     username:string,
     address:Address,
-    totalSeats:string
+    totalSeats:string,
+    image:Uint8Array
 }
