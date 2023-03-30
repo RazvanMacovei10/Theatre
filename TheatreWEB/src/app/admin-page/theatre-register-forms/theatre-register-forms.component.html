@@ -1,10 +1,35 @@
-<div class="register-form-container">
-    <span class="username">{{registerForm.username}}</span>
-    <p class="address">{{registerForm.address.city +' '+ registerForm.address.street+' ' + registerForm.address.number}}</p>
-    <p class="total-seats">{{registerForm.totalSeats}}</p>
-    <img [src]="byteArrayToImageUrl()" alt="Converted Image">
-    <div>
-    <button class="approve-button">Approve</button>
-    <button class="delete-button">Delete</button>
-</div>
+<div class="container border border-2 border-secondary rounded p-3">
+  <div class="row">
+    <div class="col">
+      <span class="fw-bold">Username: </span>
+      <p class="username">{{ registerForm.username }}</p>
+    </div>
+    <div class="col">
+      <span class="fw-bold">Address:</span>
+      <p class="address">
+        {{
+          registerForm.address.city +
+            " " +
+            registerForm.address.street +
+            " " +
+            registerForm.address.number
+        }}
+      </p>
+    </div>
+    <div class="col">
+      <span class="fw-bold">Total seats:</span>
+      <p class="total-seats">{{ registerForm.totalSeats }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <img [src]="byteArrayToImageUrl()" alt="Converted Image" class="img-fluid rounded mt-3" />
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col d-flex justify-content-center">
+      <button class="btn btn-primary me-3">Approve</button>
+      <button class="btn btn-danger">Delete</button>
+    </div>
+  </div>
 </div>
