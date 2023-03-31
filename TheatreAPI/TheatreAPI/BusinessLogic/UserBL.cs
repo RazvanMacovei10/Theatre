@@ -36,7 +36,7 @@ namespace TheatreAPI.BusinessLogic
 
         public async Task<User> GetByUsername(string username)
         {
-            var result = await _context.Users.SingleOrDefaultAsync(x => x.Username == username);
+            var result = await _context.Users.Include(x=>x.Role).SingleOrDefaultAsync(x => x.Username == username);
 
             return result;
         }

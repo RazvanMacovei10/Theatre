@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AccountService } from 'src/app/_services/account.service';
 
@@ -11,7 +12,25 @@ export class LoginComponent implements OnInit {
 
   isLoggedIn$:Observable<boolean>=new Observable<boolean>()
   model:any={}
-  constructor(private accountService:AccountService) { }
+  constructor(private accountService:AccountService,private router:Router) { 
+    let role=this.accountService.userValue?.role;
+    if(accountService.userValue)
+    switch(role){
+
+      case "ROLE_ADMIN":
+        this.router.navigateByUrl('/admin');
+        break;
+      case "ROLE_USER":
+        this.router.navigateByUrl('/home');
+        break;
+        case "ROLE_THEATRE":
+        this.router.navigateByUrl('/theatre');
+        break;
+        default:
+          this.router.navigateByUrl('/');
+          break;
+    }
+  }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.accountService.currentUser$.pipe(
@@ -23,6 +42,24 @@ export class LoginComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next:response=>{
         console.log(response);
+        console.log(this.accountService.userValue);
+        let role=this.accountService.userValue?.role;
+        switch(role){
+
+          case "ROLE_ADMIN":
+            this.router.navigateByUrl('/admin');
+            break;
+          case "ROLE_USER":
+            this.router.navigateByUrl('/home');
+            break;
+            case "ROLE_THEATRE":
+            this.router.navigateByUrl('/theatre');
+            break;
+            default:
+              this.router.navigateByUrl('/');
+              break;
+        }
+        
       },
       error:error=>console.log(error)
     })

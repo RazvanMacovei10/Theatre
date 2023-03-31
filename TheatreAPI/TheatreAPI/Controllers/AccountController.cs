@@ -68,6 +68,7 @@ namespace TheatreAPI.Controllers
             return new UserDTO
             {
                 Username = user.Result.Username,
+                Role=user.Result.Role.Name,
                 Token = _tokenBL.CreateToken(user.Result)
             };
         }
