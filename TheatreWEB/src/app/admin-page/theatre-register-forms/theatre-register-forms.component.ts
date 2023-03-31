@@ -10,7 +10,7 @@ import { RegisterForm } from '../../_models/register-form';
 })
 export class TheatreRegisterFormsComponent implements OnInit {
   @Input() registerForm: RegisterForm = {
-    id:-1,
+    id: -1,
     username: 'defaultUsername',
     address: {
       id: -1,
@@ -18,8 +18,8 @@ export class TheatreRegisterFormsComponent implements OnInit {
       street: 'defaultStreet',
       number: 'defaultNumber',
     },
-    email:'',
-    password:'',
+    email: '',
+    password: '',
     totalSeats: 'defaultSeats',
     image: '',
   };
@@ -31,7 +31,9 @@ export class TheatreRegisterFormsComponent implements OnInit {
           type: 'image/jpeg',
         });
         this.fileToByteArray(file).subscribe((byteArray) => {
-          this.registerForm.image =window.btoa(String.fromCharCode(...byteArray));
+          this.registerForm.image = window.btoa(
+            String.fromCharCode(...byteArray)
+          );
         });
       });
   }
@@ -39,8 +41,15 @@ export class TheatreRegisterFormsComponent implements OnInit {
   ngOnInit(): void {}
 
   public byteArrayToImageUrl(): any {
-    const encoder=new TextEncoder();
-    const blob = new Blob([encoder.encode(this.registerForm.image)], { type: 'image/jpeg' });
+    const encoder = new TextEncoder();
+    const binaryString = window.atob(this.registerForm.image);
+    const bytes = new Uint8Array(binaryString.length);
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    const blob = new Blob([bytes], {
+      type: 'image/jpeg',
+    });
     const safeUrl = URL.createObjectURL(blob);
     return this.sanitizer.bypassSecurityTrustUrl(safeUrl);
   }
