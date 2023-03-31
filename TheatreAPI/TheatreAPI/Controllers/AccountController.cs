@@ -73,5 +73,30 @@ namespace TheatreAPI.Controllers
             };
         }
 
+        [HttpPost("register-theatre")]
+        public async Task<IActionResult> RegisterTheatre(RegisterFormDTO registerFormDTO)
+        {
+
+            if (await _userBL.UserExists(registerFormDTO.Username))
+            {
+                return BadRequest("Username is taken");
+            }
+            if (await _userBL.UserExistsByEmail(registerFormDTO.Email))
+            {
+                return BadRequest("Email is taken");
+            }
+            using var hmac = new HMACSHA512();
+
+            var registerForm = new RegisterForm()
+            {
+                Username = registerFormDTO.Username.ToLower(),
+                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerFormDTO.Password)),
+                PasswordSalt = hmac.Key,
+                Email = registerFormDTO.Email.ToLower()
+            };
+            _registerFormBL.CreateAsync(registerForm);
+            return Ok(registerForm);
+        }
+
     }
 }

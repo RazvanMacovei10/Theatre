@@ -5,6 +5,7 @@ import { LoginPageRoutingModule } from './login-page-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { RegisterTheatreComponent } from './register-theatre/register-theatre.component';
 
 
 
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     RegisterComponent,
     LoginComponent,
+    RegisterTheatreComponent,
   ],
   imports: [
     CommonModule,
