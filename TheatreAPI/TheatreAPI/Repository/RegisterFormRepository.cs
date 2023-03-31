@@ -1,4 +1,5 @@
-﻿using TheatreAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatreAPI.Models;
 
 namespace TheatreAPI.Repository
 {
@@ -7,6 +8,13 @@ namespace TheatreAPI.Repository
         public RegisterFormRepository(AppDbContext appDbContext):base(appDbContext)
         {
 
+        }
+
+        public async Task<RegisterForm> GetById(int id)
+        {
+            var result = await Context.RegisterForms.Where(e => e.Id == id).Include(x=>x.Address).FirstOrDefaultAsync();
+
+            return result;
         }
     }
 }

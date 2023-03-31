@@ -15,28 +15,22 @@ namespace TheatreAPI.BusinessLogic
 
         public async Task<User> GetById(int userId)
         {
-            var result = await _context.Users.Where(e => e.Id == userId).FirstOrDefaultAsync();
+            var result = await (Repository as IUserRepository).GetById(userId);
 
             return result;
         }
-
-        public void Add(User user)
-        {
-            _context.Users.Add(user);
-            _context.SaveChangesAsync();
-        }
         public async Task<bool> UserExists(string username)
         {
-            return await _context.Users.AnyAsync(x => x.Username == username.ToLower());
+            return await (Repository as IUserRepository).UserExists(username);
         }
         public async Task<bool> UserExistsByEmail(string email)
         {
-            return await _context.Users.AnyAsync(x => x.Email == email.ToLower());
+            return await (Repository as IUserRepository).UserExistsByEmail(email);
         }
 
         public async Task<User> GetByUsername(string username)
         {
-            var result = await _context.Users.Include(x=>x.Role).SingleOrDefaultAsync(x => x.Username == username);
+            var result = await (Repository as IUserRepository).GetByUsername(username);
 
             return result;
         }

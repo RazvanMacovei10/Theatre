@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { RegisterForm } from '../../_models/register-form';
+import { RegisterFormsService } from 'src/app/_services/register-forms.service';
 
 @Component({
   selector: 'app-theatre-register-forms',
@@ -23,7 +24,11 @@ export class TheatreRegisterFormsComponent implements OnInit {
     totalSeats: 'defaultSeats',
     image: '',
   };
-  constructor(private sanitizer: DomSanitizer) {
+  @Output() reloadList: EventEmitter<any> = new EventEmitter();
+  constructor(
+    private sanitizer: DomSanitizer,
+    private registerFormService: RegisterFormsService
+  ) {
     fetch('assets/default-theatre.jpg')
       .then((response) => response.blob())
       .then((blob) => {
@@ -40,7 +45,7 @@ export class TheatreRegisterFormsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public byteArrayToImageUrl(): any {
+  byteArrayToImageUrl(): any {
     const encoder = new TextEncoder();
     const binaryString = window.atob(this.registerForm.image);
     const bytes = new Uint8Array(binaryString.length);
@@ -54,7 +59,7 @@ export class TheatreRegisterFormsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(safeUrl);
   }
 
-  public fileToByteArray(file: File): Observable<Uint8Array> {
+  fileToByteArray(file: File): Observable<Uint8Array> {
     return new Observable((observer) => {
       const reader = new FileReader();
       reader.onload = () => {
@@ -64,5 +69,15 @@ export class TheatreRegisterFormsComponent implements OnInit {
       };
       reader.readAsArrayBuffer(file);
     });
+  }
+  approveTheatre() {
+    this.registerFormService
+      .createUser(this.registerForm.id.toString())
+      .subscribe(() => this.reloadList.emit(null));
+  }
+  deleteTheatre() {
+    this.registerFormService
+      .deleteForm(this.registerForm.id.toString())
+      .subscribe(() => this.reloadList.emit());
   }
 }

@@ -34,4 +34,11 @@ export class AdminDefaultComponent implements OnInit {
     this.accountService.logout();
     this.router.navigate(['/auth']);
   }
+
+  reloadList(){
+    this.registerFormSerive.getRegisterForms().subscribe((x) => {
+      this.registerForms = x;
+      console.log(x);
+    });
+  }
 }

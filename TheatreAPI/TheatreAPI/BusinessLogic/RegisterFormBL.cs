@@ -10,5 +10,10 @@ namespace TheatreAPI.BusinessLogic
         {
 
         }
+
+        public async Task<RegisterForm> GetById(int id)
+        {
+            return await (Repository as IRegisterFormRepository).GetById(id);
+        }
     }
 }

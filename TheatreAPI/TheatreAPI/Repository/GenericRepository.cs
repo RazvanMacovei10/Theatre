@@ -5,6 +5,7 @@ namespace TheatreAPI.Repository
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly AppDbContext _context;
+        public AppDbContext Context { get { return _context; } }
         public GenericRepository(AppDbContext context)
         {
             _context = context;
@@ -29,9 +30,17 @@ namespace TheatreAPI.Repository
             
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity=await _context.Set<TEntity>().FindAsync(id);
+            if (entity == null)
+            {
+                throw new Exception($"{nameof(entity)} could not be found");
+            }
+
+            _context.Set<TEntity>().Remove(entity);
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<IList<TEntity>> GetAllAsync(params string[] navigationProperties)
