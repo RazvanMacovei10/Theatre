@@ -34,11 +34,16 @@ namespace TheatreAPI.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IList<TEntity>> GetAllAsync()
+        public async Task<IList<TEntity>> GetAllAsync(params string[] navigationProperties)
         {
             try
             {
-                return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
+                IQueryable<TEntity> query=_context.Set<TEntity>();
+                foreach(string navigationProperty in navigationProperties)
+                {
+                    query = query.Include(navigationProperty);
+                }
+                return await query.AsNoTracking().ToListAsync();
             }
             catch(Exception ex)
             {

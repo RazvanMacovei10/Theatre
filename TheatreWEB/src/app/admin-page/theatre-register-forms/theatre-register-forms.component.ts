@@ -10,6 +10,7 @@ import { RegisterForm } from '../../_models/register-form';
 })
 export class TheatreRegisterFormsComponent implements OnInit {
   @Input() registerForm: RegisterForm = {
+    id:-1,
     username: 'defaultUsername',
     address: {
       id: -1,
@@ -39,7 +40,7 @@ export class TheatreRegisterFormsComponent implements OnInit {
 
   public byteArrayToImageUrl(): any {
     const encoder=new TextEncoder();
-    const blob = new Blob([window.atob(this.registerForm.image)], { type: 'image/jpeg' });
+    const blob = new Blob([encoder.encode(this.registerForm.image)], { type: 'image/jpeg' });
     const safeUrl = URL.createObjectURL(blob);
     return this.sanitizer.bypassSecurityTrustUrl(safeUrl);
   }

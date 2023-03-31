@@ -1,14 +1,20 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TheatreAPI;
 using TheatreAPI.BusinessLogic;
 using TheatreAPI.IBusinessLogic;
 using TheatreAPI.Models;
 using TheatreAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
 // Add services to the container.
 
 builder.Services.AddCors(options =>
@@ -30,7 +36,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IActorRepository, ActorRepository>();

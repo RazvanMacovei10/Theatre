@@ -11,6 +11,7 @@ import { AccountService } from 'src/app/_services/account.service';
 export class RegisterTheatreComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
   model: RegisterForm = {
+    id:-1,
     address: { city: '', street: '', number: '', id: 0 },
     username: '',
     totalSeats: '',

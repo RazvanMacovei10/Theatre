@@ -10,5 +10,6 @@
         public int AddressId { get; set; }
         public Address Address { get; set; }
         public byte[] Image { get; set; }
+        public int TotalSeats { get; set; }
     }
 }

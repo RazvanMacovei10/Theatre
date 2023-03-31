@@ -22,9 +22,9 @@ namespace TheatreAPI.BusinessLogic
             throw new NotImplementedException();
         }
 
-        public async Task<IList<TEntity>> GetAllAsync()
+        public async Task<IList<TEntity>> GetAllAsync(params string[] navigationProperties)
         {
-            var results = await _repository.GetAllAsync();
+            var results = await _repository.GetAllAsync(navigationProperties);
 
             return results;
         }

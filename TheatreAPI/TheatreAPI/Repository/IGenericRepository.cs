@@ -2,7 +2,7 @@
 {
     public interface IGenericRepository<TEntity>
     {
-        Task<IList<TEntity>> GetAllAsync();
+        Task<IList<TEntity>> GetAllAsync(params string[] navigationProperties);
 
         Task<TEntity> CreateAsync(TEntity entity);
 
