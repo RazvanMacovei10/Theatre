@@ -9,6 +9,6 @@ namespace TheatreAPI.DTOs
         public string Email { get; set; }
         public Address Address { get; set; }
         public int TotalSeats { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     }
 }

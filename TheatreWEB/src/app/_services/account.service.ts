@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { RegisterForm } from '../_models/register-form';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,11 @@ export class AccountService {
         return user;
       })
     )
+  }
+
+  
+  registerTheatre(model:any){
+    return this.http.post<RegisterForm>(this.baseUrl+'Account/register-theatre',model);
   }
 
   setCurrentUser(user:User){

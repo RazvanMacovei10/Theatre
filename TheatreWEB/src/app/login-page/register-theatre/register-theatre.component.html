@@ -20,7 +20,7 @@
         <input type="Number" class="form-control" name="Number"[(ngModel)]="model.address.number" placeholder="Number">
     </div>
     <div class="mb-3">
-        <input type="Number" class="form-control" name="totalseats"[(ngModel)]="model.address.street" placeholder="Total seats">
+        <input type="Number" class="form-control" name="totalSeats"[(ngModel)]="model.totalSeats" placeholder="Total seats" min="0">
     </div>
     <label for="image">Select image to upload:</label>
     <input type="file" name="image" id="image" (change)="onFileSelected($event)">

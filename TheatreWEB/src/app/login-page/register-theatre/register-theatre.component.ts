@@ -14,10 +14,9 @@ export class RegisterTheatreComponent implements OnInit {
     address: { city: '', street: '', number: '', id: 0 },
     username: '',
     totalSeats: '',
-    id: 0,
     password: '',
     email: '',
-    image: new Uint8Array(0),
+    image: '',
   };
 
   constructor(private accountService: AccountService) {}
@@ -25,7 +24,8 @@ export class RegisterTheatreComponent implements OnInit {
   ngOnInit(): void {}
 
   register() {
-    this.accountService.register(this.model).subscribe({
+    this.model.address.number=this.model.address.number.toString();
+    this.accountService.registerTheatre(this.model).subscribe({
       next: () => {
         this.cancel();
       },
@@ -37,7 +37,9 @@ export class RegisterTheatreComponent implements OnInit {
   }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-    this.fileToByteArray(file).subscribe(data=>this.model.image=data);
+    this.fileToByteArray(file).subscribe((byteArray) => {
+      this.model.image =window.btoa(String.fromCharCode(...byteArray));
+    });
     console.log(this.model);
   }
   public fileToByteArray(file: File): Observable<Uint8Array> {
