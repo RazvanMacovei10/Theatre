@@ -10,16 +10,30 @@ import { AccountService } from 'src/app/_services/account.service';
 })
 export class AddEventComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean> = new Observable<boolean>();
-  constructor(private accountService: AccountService, private router: Router) { }
+
+  minDate = new Date().toISOString().split('T')[0];
+  date = '';
+  time = '';
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.accountService.currentUser$.pipe(
-      map((user) => !!user)
-    );
-  }
-  logout() {
-    this.accountService.logout();
+
   }
 
+
+  onSubmit() {
+    console.log('Selected date and time:', this.date, this.time);
+  }
+
+  onTimeChange(event: any) {
+    const timeValue = event.target.value;
+    const hour = parseInt(timeValue.split(':')[0], 10);
+
+    if (hour % 2 !== 0) {
+      const evenHour = hour + 1;
+      const evenTimeString = (evenHour < 10 ? '0' : '') + evenHour + timeValue.substring(2);
+      this.time = evenTimeString;
+    }
+  }
 }

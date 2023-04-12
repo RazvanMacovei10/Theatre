@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { AddPlayComponent } from './add-play/add-play.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AddPlayComponent } from './add-play/add-play.component';
   ],
   imports: [
     CommonModule,
-    TheatrePageRoutingModule
+    TheatrePageRoutingModule,
+    FormsModule
   ]
 })
 export class TheatrePageModule { }
