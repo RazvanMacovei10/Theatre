@@ -12,6 +12,10 @@
     </div>
     <div class="text-center">
         <button class="btn btn-success me-2" type="submit">Register</button>
-        <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+        <button class="btn btn-danger" type="button" (click)="cancel()">Cancel</button>
     </div>
 </form>
+<div class="display: flex; justify-content: flex-end" style="float:right">
+    <button class="btn btn-primary me-2" routerLink="/auth/register-theatre">Register as theatre</button>
+    <button class="btn btn-primary me-2" routerLink="/auth/login">Login</button>
+</div>
