@@ -10,5 +10,12 @@ namespace TheatreAPI.BusinessLogic
         {
 
         }
+
+        public async Task<UserRole> GetById(int userId)
+        {
+            var result = await (Repository as IUserRoleRepository).GetById(userId);
+
+            return result;
+        }
     }
 }

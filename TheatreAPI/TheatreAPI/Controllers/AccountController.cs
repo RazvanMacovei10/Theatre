@@ -14,11 +14,13 @@ namespace TheatreAPI.Controllers
         private readonly IUserBL _userBL;
         private readonly ITokenBL _tokenBL;
         private readonly IRegisterFormBL _registerFormBL;
-        public AccountController(IUserBL userBL, ITokenBL tokenBL,IRegisterFormBL registerFormBL)
+        private readonly IUserRoleBL _userRoleBL;
+        public AccountController(IUserBL userBL, ITokenBL tokenBL,IRegisterFormBL registerFormBL, IUserRoleBL userRoleBL)
         {
             _userBL = userBL;
             _tokenBL = tokenBL;
             _registerFormBL = registerFormBL;
+            _userRoleBL = userRoleBL;
         }
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
@@ -40,13 +42,15 @@ namespace TheatreAPI.Controllers
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
                 PasswordSalt = hmac.Key,
                 Email = registerDTO.Email.ToLower(),
-                RoleId = 1
+                RoleId = 1,
+                Role = await _userRoleBL.GetById(1)
             };
-            _userBL.CreateAsync(user);
+            await _userBL.CreateAsync(user);
             return new UserDTO
             {
                 Username = user.Username,
-                Token = _tokenBL.CreateToken(user)
+                Token = _tokenBL.CreateToken(user),
+                Role = user.Role.Name
             };
         }
 

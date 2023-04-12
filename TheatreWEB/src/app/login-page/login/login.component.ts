@@ -6,65 +6,62 @@ import { AccountService } from 'src/app/_services/account.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
-  isLoggedIn$:Observable<boolean>=new Observable<boolean>()
-  model:any={}
-  constructor(private accountService:AccountService,private router:Router) { 
-    let role=this.accountService.userValue?.role;
-    if(accountService.userValue)
-    switch(role){
-
-      case "ROLE_ADMIN":
-        this.router.navigateByUrl('/admin');
-        break;
-      case "ROLE_USER":
-        this.router.navigateByUrl('/home');
-        break;
-        case "ROLE_THEATRE":
-        this.router.navigateByUrl('/theatre');
-        break;
+  isLoggedIn$: Observable<boolean> = new Observable<boolean>();
+  model: any = {};
+  constructor(private accountService: AccountService, private router: Router) {
+    let role = this.accountService.userValue?.role;
+    console.log(role);
+    if (accountService.userValue)
+      switch (role) {
+        case 'ROLE_ADMIN':
+          this.router.navigateByUrl('/admin');
+          break;
+        case 'ROLE_USER':
+          this.router.navigateByUrl('/home');
+          break;
+        case 'ROLE_THEATRE':
+          this.router.navigateByUrl('/theatre');
+          break;
         default:
           this.router.navigateByUrl('/');
           break;
-    }
+      }
   }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.accountService.currentUser$.pipe(
-      map(user => !!user)
+      map((user) => !!user)
     );
   }
 
-  login(){
+  login() {
     this.accountService.login(this.model).subscribe({
-      next:response=>{
+      next: (response) => {
         console.log(response);
         console.log(this.accountService.userValue);
-        let role=this.accountService.userValue?.role;
-        switch(role){
-
-          case "ROLE_ADMIN":
+        let role = this.accountService.userValue?.role;
+        switch (role) {
+          case 'ROLE_ADMIN':
             this.router.navigateByUrl('/admin');
             break;
-          case "ROLE_USER":
+          case 'ROLE_USER':
             this.router.navigateByUrl('/home');
             break;
-            case "ROLE_THEATRE":
+          case 'ROLE_THEATRE':
             this.router.navigateByUrl('/theatre');
             break;
-            default:
-              this.router.navigateByUrl('/');
-              break;
+          default:
+            this.router.navigateByUrl('/');
+            break;
         }
-        
       },
-      error:error=>console.log(error)
-    })
+      error: (error) => console.log(error),
+    });
   }
-  logout(){
+  logout() {
     this.accountService.logout();
   }
 }

@@ -1,4 +1,5 @@
-﻿using TheatreAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatreAPI.Models;
 
 namespace TheatreAPI.Repository
 {
@@ -7,6 +8,13 @@ namespace TheatreAPI.Repository
         public UserRoleRepository(AppDbContext appDbContext):base(appDbContext)
         {
 
+        }
+
+        public async Task<UserRole> GetById(int id)
+        {
+            var result = await Context.Roles.Where(e => e.Id == id).FirstOrDefaultAsync();
+
+            return result;
         }
     }
 }

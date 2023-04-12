@@ -34,7 +34,7 @@ export class RegisterTheatreComponent implements OnInit {
     });
   }
   cancel() {
-    this.router.navigateByUrl("/auth");
+    this.router.navigateByUrl("");
   }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];

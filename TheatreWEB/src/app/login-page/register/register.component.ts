@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Role } from 'src/app/_models/role';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -16,6 +17,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
+    this.model.role=Role.User;
+    console.log(this.model);
     this.accountService.register(this.model).subscribe({
       next:()=>{
         this.cancel();
@@ -24,7 +27,7 @@ export class RegisterComponent implements OnInit {
     })
   }
   cancel(){
-    this.router.navigateByUrl("/auth");
+    this.router.navigateByUrl("");
   }
 
 }
