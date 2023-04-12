@@ -7,27 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEventComponent implements OnInit {
 
-  minDate = new Date().toISOString().split('T')[0];
+  currentDate = new Date();
+  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 1)
+  minDate = this.tomorrow.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).split(',')[0];
   date = '';
   time = '';
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    console.log('Selected date and time:', this.date, this.time);
   }
 
   onTimeChange(event: any) {
     const timeValue = event.target.value;
     const hour = parseInt(timeValue.split(':')[0], 10);
+    let evenTimeString = '';
+    let evenHour = hour;
 
     if (hour % 2 !== 0) {
-      const evenHour = hour + 1;
-      const evenTimeString = (evenHour < 10 ? '0' : '') + evenHour + timeValue.substring(2);
-      this.time = evenTimeString;
+       evenHour = hour + 1;
     }
+    evenTimeString = (evenHour < 10 ? '0' : '') + evenHour;
+    this.time = evenTimeString + ':00';
   }
 }

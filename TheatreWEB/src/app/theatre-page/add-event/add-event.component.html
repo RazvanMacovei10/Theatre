@@ -10,6 +10,15 @@
             <label for="time-input" class="form-label">Time</label>
             <input type="time" class="form-control" id="time-input" [(ngModel)]="time" name="time" (change)="onTimeChange($event)">
           </div>
+          <div class="mb-3">
+            <label for="dropdown" class="form-label">Play</label>
+            <select class="form-select" id="dropdown">
+              <option selected>Select an option</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
           <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="button" class="btn btn-secondary">Cancel</button>
