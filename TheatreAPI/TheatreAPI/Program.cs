@@ -39,7 +39,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IPlayTypeRepository, PlayTypeRepository>();
 builder.Services.AddScoped<IPlayRepository, PlayRepository>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
@@ -49,7 +48,6 @@ builder.Services.AddScoped<ITicketRepository, TicketRepository>();
 builder.Services.AddScoped<IRegisterFormRepository, RegisterFormRepository>();
 
 builder.Services.AddScoped<IUserBL, UserBL>();
-builder.Services.AddScoped<IPlayTypeBL, PlayTypeBL>();
 builder.Services.AddScoped<IPlayBL, PlayBL>();
 builder.Services.AddScoped<IUserRoleBL, UserRoleBL>();
 builder.Services.AddScoped<IAddressBL, AddressBL>();
