@@ -97,7 +97,7 @@ namespace TheatreAPI.Controllers
                 Image=Convert.FromBase64String(registerFormDTO.Image),
                 TotalSeats=registerFormDTO.TotalSeats
             };
-            _registerFormBL.CreateAsync(registerForm);
+            await _registerFormBL.CreateAsync(registerForm);
             return Ok(registerForm);
         }
 

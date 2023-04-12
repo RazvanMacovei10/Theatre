@@ -13,9 +13,9 @@ namespace TheatreAPI.BusinessLogic
             _repository = repository;
         }
 
-        public Task<TEntity> CreateAsync(TEntity entity)
+        public async Task<TEntity> CreateAsync(TEntity entity)
         {
-           return _repository.CreateAsync(entity);
+           return await _repository.CreateAsync(entity);
         }
 
         public async Task<bool> DeleteAsync(int id)
