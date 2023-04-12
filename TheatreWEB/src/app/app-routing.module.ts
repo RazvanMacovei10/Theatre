@@ -31,7 +31,7 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       data:{roles:[Role.Theatre]}
   },
-  { path: '', 
+  { path: '**', 
   redirectTo: '/auth/login', pathMatch: 'full' },
 ];
 
