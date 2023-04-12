@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -7,11 +8,9 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
-  @Output() cancelRegister=new EventEmitter();
   model:any={};
 
-  constructor(private accountService:AccountService) { }
+  constructor(private accountService:AccountService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +24,7 @@ export class RegisterComponent implements OnInit {
     })
   }
   cancel(){
-    this.cancelRegister.emit(false);
+    this.router.navigateByUrl("/auth");
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RegisterForm } from 'src/app/_models/register-form';
 import { AccountService } from 'src/app/_services/account.service';
@@ -9,7 +10,6 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./register-theatre.component.scss'],
 })
 export class RegisterTheatreComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
   model: RegisterForm = {
     id:-1,
     address: { city: '', street: '', number: '', id: 0 },
@@ -20,7 +20,7 @@ export class RegisterTheatreComponent implements OnInit {
     image: '',
   };
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private router:Router) {}
 
   ngOnInit(): void {}
 
@@ -34,7 +34,7 @@ export class RegisterTheatreComponent implements OnInit {
     });
   }
   cancel() {
-    this.cancelRegister.emit(false);
+    this.router.navigateByUrl("/auth");
   }
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
