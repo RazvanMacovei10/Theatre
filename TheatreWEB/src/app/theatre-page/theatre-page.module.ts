@@ -5,6 +5,7 @@ import { TheatrePageRoutingModule } from './theatre-page-routing.module';
 import { HomeComponent } from './home/home.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AddEventComponent } from './add-event/add-event.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AddEventComponent } from './add-event/add-event.component';
   ],
   imports: [
     CommonModule,
-    TheatrePageRoutingModule
+    TheatrePageRoutingModule,
+    FormsModule
   ]
 })
 export class TheatrePageModule { }
