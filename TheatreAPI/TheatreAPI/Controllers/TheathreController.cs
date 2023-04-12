@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
+using TheatreAPI.BusinessLogic;
+using TheatreAPI.DTOs;
 using TheatreAPI.IBusinessLogic;
+using TheatreAPI.Models;
 
 namespace TheatreAPI.Controllers
 {
@@ -9,9 +15,22 @@ namespace TheatreAPI.Controllers
     public class TheathreController : ControllerBase
     {
         private readonly ITheathreBL _theathreBL;
-        public TheathreController(ITheathreBL theathreBL)
+        private readonly IPlayBL _playBL;
+        private readonly IMapper _mapper;
+        public TheathreController(ITheathreBL theathreBL, IPlayBL playBL, IMapper mapper)
         {
             _theathreBL = theathreBL;
+            _playBL = playBL;
+            _mapper = mapper;
+        }
+        [HttpPost("play")]
+        public async Task<IActionResult> AddPlay(PlayDTO playDTO)
+        {
+
+            Play play = _mapper.Map<Play>(playDTO);
+
+            await _playBL.CreateAsync(play);
+            return Ok(play);
         }
     }
 }

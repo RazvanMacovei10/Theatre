@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Play } from 'src/app/_models/play';
 import { AccountService } from 'src/app/_services/account.service';
+import { TheatreService } from 'src/app/_services/theatre.service';
 
 @Component({
   selector: 'app-add-play',
@@ -12,9 +13,9 @@ import { AccountService } from 'src/app/_services/account.service';
 export class AddPlayComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean> = new Observable<boolean>();
-  constructor(private accountService: AccountService, private router: Router) { }
+  constructor(private theatreService: TheatreService, private router: Router) { }
   model: Play = {
-    id:-1,
+    id:0,
     name:'',
     description:'',
     image:'',
@@ -23,16 +24,10 @@ export class AddPlayComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.accountService.currentUser$.pipe(
-      map((user) => !!user)
-    );
-  }
-  logout() {
-    this.accountService.logout();
   }
 
   addPlay() {
-    this.accountService.add(this.model).subscribe({
+    this.theatreService.addPlay(this.model).subscribe({
       next: () => {
         this.cancel();
       },
