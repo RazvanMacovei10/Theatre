@@ -8,7 +8,7 @@
         public byte[] Image { get; set; }
         public int PlayTypeId { get; set; }
         public PlayType Type { get; set; }
-        public List<Actor> Actors { get; set; }
+        public string Actors { get; set; }
 
     }
 }

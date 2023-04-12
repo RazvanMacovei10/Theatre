@@ -22,32 +22,6 @@ namespace TheatreAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TheatreAPI.Models.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlayId");
-
-                    b.ToTable("Actors");
-                });
-
             modelBuilder.Entity("TheatreAPI.Models.Address", b =>
                 {
                     b.Property<int>("Id")
@@ -109,6 +83,10 @@ namespace TheatreAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Actors")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -297,13 +275,6 @@ namespace TheatreAPI.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("TheatreAPI.Models.Actor", b =>
-                {
-                    b.HasOne("TheatreAPI.Models.Play", null)
-                        .WithMany("Actors")
-                        .HasForeignKey("PlayId");
-                });
-
             modelBuilder.Entity("TheatreAPI.Models.Event", b =>
                 {
                     b.HasOne("TheatreAPI.Models.Play", "Play")
@@ -392,11 +363,6 @@ namespace TheatreAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("TheatreAPI.Models.Play", b =>
-                {
-                    b.Navigation("Actors");
                 });
 
             modelBuilder.Entity("TheatreAPI.Models.Theatre", b =>
