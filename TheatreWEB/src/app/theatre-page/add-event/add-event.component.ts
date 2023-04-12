@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-add-event',
@@ -6,9 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-event.component.scss']
 })
 export class AddEventComponent implements OnInit {
-
   currentDate = new Date();
-  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 1)
+  tomorrow = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), this.currentDate.getDate() + 1);
   minDate = this.tomorrow.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }).split(',')[0];
   date = '';
   time = '';
@@ -17,7 +19,9 @@ export class AddEventComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
   }
+
 
   onSubmit() {
   }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TheatreAPI.BusinessLogic;
 using TheatreAPI.IBusinessLogic;
+using TheatreAPI.Models;
 
 namespace TheatreAPI.Controllers
 {
@@ -13,5 +15,17 @@ namespace TheatreAPI.Controllers
         {
             _playBL = playBL;
         }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Play play)
+        {
+            if (play == null)
+            {
+                return BadRequest();
+            }
+
+            await _playBL.CreateAsync(play);
+            return Ok();
+        }
     }
+
 }
