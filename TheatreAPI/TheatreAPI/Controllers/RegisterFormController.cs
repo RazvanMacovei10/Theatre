@@ -45,7 +45,7 @@ namespace TheatreAPI.Controllers
                 Email=registerForm.Email,
                 PasswordHash=registerForm.PasswordHash,
                 PasswordSalt=registerForm.PasswordSalt,
-                RoleId=2
+                RoleId=3
             };
             user=await _userBL.CreateAsync(user);
             Theatre theatre= new Theatre()
