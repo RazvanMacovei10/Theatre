@@ -38,9 +38,18 @@ namespace TheatreAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetEvents()
         {
-            List<Event> forms = (List<Event>)await _eventBL.GetAllAsync("Theatre", "Play", "Theatre.User");
-            List<EventDTO> formsDTO = _mapper.Map<List<EventDTO>>(forms);
-            return Ok(formsDTO);
+            List<Event> events = (List<Event>)await _eventBL.GetAllAsync("Theatre", "Play", "Theatre.User");
+            List<EventDTO> eventsDTO = _mapper.Map<List<EventDTO>>(events);
+            return Ok(eventsDTO);
+        }
+
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetEventsByTheatreId(string name)
+        {
+            List<Event> events = (List<Event>)await _eventBL.GetAllAsync("Theatre", "Play", "Theatre.User");
+            events=events.Where(e => e.Theatre.User.Username == name).ToList();
+            List<EventDTO> eventsDTO = _mapper.Map<List<EventDTO>>(events);
+            return Ok(eventsDTO);
         }
     }
 }

@@ -12,7 +12,11 @@ import { Event } from '../_models/event';
 })
 export class TheatreService {
   baseUrl = 'https://localhost:7270/api/';
-  constructor(private http: HttpClient, private router: Router, private accountService:AccountService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private accountService: AccountService
+  ) {}
   addPlay(model: any) {
     console.log(model);
     return this.http.post<Play>(this.baseUrl + 'Play', model);
@@ -25,14 +29,22 @@ export class TheatreService {
   }
 
   addEvent(model: EventSent) {
-    if(this.accountService.userValue!=null){
-      model.theatreName=this.accountService.userValue.username;
+    if (this.accountService.userValue != null) {
+      model.theatreName = this.accountService.userValue.username;
     }
     console.log(model);
     return this.http.post<EventSent>(this.baseUrl + 'Event', model);
   }
 
-  getEvents(): Observable<Event[]>{
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(this.baseUrl + 'Event');
+  }
+
+  getEventsByCurrentUser(): Observable<Event[]> {
+    if (this.accountService.userValue != null)
+      return this.http.get<Event[]>(
+        this.baseUrl + 'Event/' + this.accountService.userValue.username
+      );
     return this.http.get<Event[]>(this.baseUrl + 'Event');
   }
 }
