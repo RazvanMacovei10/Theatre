@@ -36,3 +36,17 @@
       </div>
     </div>
   </nav>
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-4"  *ngFor="let item of plays" style="margin-bottom: 2.5em;">
+          <div style="width: 18rem;" class="card" >
+            <img [src]="getImageUrl(item)" class="card-img card-img-top image-scale" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">description: <strong>{{item.description}}</strong></p>
+                <p class="card-text">Authors: <b>{{item.actors}}</b></p>
+            </div>  
+          </div>
+        </div>
+    </div>
+  </div>

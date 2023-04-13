@@ -26,6 +26,13 @@ namespace TheatreAPI.Controllers
             await _playBL.CreateAsync(play);
             return Ok();
         }
+        [HttpGet]
+
+        public async Task<IList<Play>> GetPlays()
+        {
+            var plays = await _playBL.GetAllAsync();
+            return plays;
+        }
     }
 
 }

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map,Observable } from 'rxjs';
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean> = new Observable<boolean>();
   constructor(private accountService: AccountService, private router: Router) { }
+  plays:any;
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.accountService.currentUser$.pipe(
@@ -21,5 +23,6 @@ export class HomeComponent implements OnInit {
   logout() {
     this.accountService.logout();
   }
+
 
 }
