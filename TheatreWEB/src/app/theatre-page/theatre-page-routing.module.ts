@@ -5,9 +5,11 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { combineLatest } from 'rxjs';
 import { AddEventComponent } from './add-event/add-event.component';
 import { AddPlayComponent } from './add-play/add-play.component';
+import { PlaysComponent } from './plays/plays.component';
 
 const routes: Routes = [
   { path: 'schedule', component: ScheduleComponent },
+  { path: 'play', component: PlaysComponent },
   { path: 'schedule/add', component: AddEventComponent },
   { path: 'play/add', component: AddPlayComponent },
   { path: '', component: HomeComponent },
