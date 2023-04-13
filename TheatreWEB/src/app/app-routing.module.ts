@@ -24,20 +24,6 @@ const routes: Routes = [
       canActivate: [AuthGuard],
       data:{roles:[Role.User]}
   },
-  {
-    path: 'theatre',
-    loadChildren: () =>
-      import('./theatre-page/theatre-page.module').then((m) => m.TheatrePageModule),
-      canActivate: [AuthGuard],
-      data:{roles:[Role.Theatre]}
-  },
-  {
-    path: 'add-play',
-    loadChildren: () =>
-      import('./theatre-page/theatre-page.module').then((m) => m.TheatrePageModule),
-      canActivate: [AuthGuard],
-      data:{roles:[Role.Theatre]}
-  },
   { path: '**', 
   redirectTo: '/auth/login', pathMatch: 'full' },
 ];
