@@ -8,26 +8,31 @@ import { TheatreService } from 'src/app/_services/theatre.service';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss']
+  styleUrls: ['./schedule.component.scss'],
 })
 export class ScheduleComponent implements OnInit {
   isLoggedIn$: Observable<boolean> = new Observable<boolean>();
-  events:Event[]=[];
-  constructor(private accountService: AccountService, private router: Router, private theatreService:TheatreService) { }
+  events: Event[] = [];
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private theatreService: TheatreService
+  ) {}
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.accountService.currentUser$.pipe(
       map((user) => !!user)
     );
-    this.theatreService.getEvents().subscribe((data)=>{
-      this.events=data;
-    })
+    this.theatreService.getEventsByCurrentUser().subscribe((data) => {
+      this.events = data.sort(
+        (a, b) =>
+          new Date(a.datetime).getTime() - new Date(b.datetime).getTime()
+      );
+    });
   }
   logout() {
     this.accountService.logout();
   }
 
-  deleteEvent(id:number){
-
-  }
+  deleteEvent(id: number) {}
 }
