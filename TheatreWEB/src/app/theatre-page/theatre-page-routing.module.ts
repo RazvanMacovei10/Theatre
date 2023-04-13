@@ -8,13 +8,10 @@ import { AddPlayComponent } from './add-play/add-play.component';
 
 const routes: Routes = [
   { path: 'schedule', component: ScheduleComponent },
-  { path: 'schedule/add', component: AddEventComponent},
-  {path:"play/add",component:AddPlayComponent},
+  { path: 'schedule/add', component: AddEventComponent },
+  { path: 'play/add', component: AddPlayComponent },
   { path: '', component: HomeComponent },
-]
-
-
-
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -51,5 +51,12 @@ namespace TheatreAPI.Controllers
             List<EventDTO> eventsDTO = _mapper.Map<List<EventDTO>>(events);
             return Ok(eventsDTO);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _eventBL.DeleteAsync(id);
+            return Ok();
+        }
     }
 }

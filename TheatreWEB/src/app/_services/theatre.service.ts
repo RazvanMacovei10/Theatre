@@ -47,4 +47,8 @@ export class TheatreService {
       );
     return this.http.get<Event[]>(this.baseUrl + 'Event');
   }
+
+  deleteEvent(id: string) {
+    return this.http.delete(this.baseUrl + 'Event/' + id);
+  }
 }

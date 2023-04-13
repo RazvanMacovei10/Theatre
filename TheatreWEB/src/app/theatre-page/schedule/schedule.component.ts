@@ -23,6 +23,10 @@ export class ScheduleComponent implements OnInit {
     this.isLoggedIn$ = this.accountService.currentUser$.pipe(
       map((user) => !!user)
     );
+    this.loadEvents();
+  }
+
+  loadEvents(){
     this.theatreService.getEventsByCurrentUser().subscribe((data) => {
       this.events = data.sort(
         (a, b) =>
@@ -30,9 +34,13 @@ export class ScheduleComponent implements OnInit {
       );
     });
   }
+
   logout() {
     this.accountService.logout();
   }
 
-  deleteEvent(id: number) {}
+  deleteEvent(id: number) {
+    console.log(id);
+    this.theatreService.deleteEvent(id.toString()).subscribe(()=>this.loadEvents())
+  }
 }
