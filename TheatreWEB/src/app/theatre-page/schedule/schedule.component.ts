@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { Event } from 'src/app/_models/event';
 import { AccountService } from 'src/app/_services/account.service';
+import { TheatreService } from 'src/app/_services/theatre.service';
 
 @Component({
   selector: 'app-schedule',
@@ -10,15 +12,22 @@ import { AccountService } from 'src/app/_services/account.service';
 })
 export class ScheduleComponent implements OnInit {
   isLoggedIn$: Observable<boolean> = new Observable<boolean>();
-  constructor(private accountService: AccountService, private router: Router) { }
+  events:Event[]=[];
+  constructor(private accountService: AccountService, private router: Router, private theatreService:TheatreService) { }
 
   ngOnInit(): void {
     this.isLoggedIn$ = this.accountService.currentUser$.pipe(
       map((user) => !!user)
     );
+    this.theatreService.getEvents().subscribe((data)=>{
+      this.events=data;
+    })
   }
   logout() {
     this.accountService.logout();
   }
 
+  deleteEvent(id:number){
+
+  }
 }

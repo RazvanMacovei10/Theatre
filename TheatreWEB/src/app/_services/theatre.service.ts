@@ -5,6 +5,7 @@ import { Play } from '../_models/play';
 import { Observable } from 'rxjs';
 import { EventSent } from '../_models/event-sent';
 import { AccountService } from './account.service';
+import { Event } from '../_models/event';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,9 @@ export class TheatreService {
     }
     console.log(model);
     return this.http.post<EventSent>(this.baseUrl + 'Event', model);
+  }
+
+  getEvents(): Observable<Event[]>{
+    return this.http.get<Event[]>(this.baseUrl + 'Event');
   }
 }
