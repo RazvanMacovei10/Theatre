@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Play } from '../_models/play';
 import { Observable } from 'rxjs';
-import { Event } from '../_models/event';
+import { EventSent } from '../_models/event-sent';
 import { AccountService } from './account.service';
 
 @Injectable({
@@ -20,11 +20,11 @@ export class TheatreService {
     return this.http.get<Play[]>(this.baseUrl + 'Play');
   }
 
-  addEvent(model: Event) {
+  addEvent(model: EventSent) {
     if(this.accountService.userValue!=null){
       model.theatreName=this.accountService.userValue.username;
     }
     console.log(model);
-    return this.http.post<Event>(this.baseUrl + 'Event', model);
+    return this.http.post<EventSent>(this.baseUrl + 'Event', model);
   }
 }

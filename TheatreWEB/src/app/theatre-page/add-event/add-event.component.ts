@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { Event } from 'src/app/_models/event';
+import { EventSent } from 'src/app/_models/event-sent';
 import { Play } from 'src/app/_models/play';
 import { AccountService } from 'src/app/_services/account.service';
 import { TheatreService } from 'src/app/_services/theatre.service';
@@ -14,7 +14,7 @@ import { TheatreService } from 'src/app/_services/theatre.service';
 })
 export class AddEventComponent implements OnInit {
   datetimeForm!: FormGroup;
-  event: Event = {
+  event: EventSent = {
     id: 0,
     theatreName: '',
     playId: 0,

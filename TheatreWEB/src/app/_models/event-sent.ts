@@ -1,4 +1,4 @@
-export interface Event{
+export interface EventSent{
     id:number,
     theatreName:string,
     playId:number,
