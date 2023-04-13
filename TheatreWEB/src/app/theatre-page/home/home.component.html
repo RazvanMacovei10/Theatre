@@ -6,9 +6,6 @@
           <a class="nav-link" href="/plays">Plays</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/theatre/play/add">Add</a>
-          </li>
-        <li class="nav-item">
           <a class="nav-link" href="/tickets">Tickets</a>
         </li>
         <li class="nav-item">
@@ -36,12 +33,15 @@
       </div>
     </div>
   </nav>
-  <div class="container main-container">
+  <div class="d-flex justify-content-center align-items-center">
+    <a class=" btn btn-primary" href="/theatre/play/add">Add play</a>
+  </div>
+  <div class="container main-container d-flex justify-content-center">
     <div class="row">
-        <div class="col-sm-4"  *ngFor="let item of plays" style="margin-bottom: 2.5em;">
-          <div style="width: 18em;" class="card" >
+        <div class="col-sm-4"  *ngFor="let item of plays" style="margin-bottom: 2em">
+          <div class="card main-card" >
             <img [src]="getImageUrl(item)" class="card-img card-img-top image-scale" alt="...">
-            <div class="card-body">
+            <div class="card-body" style="padding:3em">
                 <h5 class="card-title">{{item.name}}</h5>
                 <p class="card-text">description: <strong>{{item.description}}</strong></p>
                 <p class="card-text">Actors: <b>{{item.actors}}</b></p>
