@@ -29,6 +29,7 @@ namespace TheatreAPI.Controllers
             Event newEvent = _mapper.Map<Event>(eventDTO);
             newEvent.Theatre = theatre;
             newEvent.TheatreId = theatre.Id;
+            newEvent.AvailableSeats = theatre.TotalSeats;
 
             await _eventBL.CreateAsync(newEvent);
             return Ok();

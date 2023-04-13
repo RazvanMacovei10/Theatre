@@ -180,32 +180,6 @@ namespace TheatreAPI.Migrations
                     b.ToTable("Theatres");
                 });
 
-            modelBuilder.Entity("TheatreAPI.Models.Ticket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Tickets");
-                });
-
             modelBuilder.Entity("TheatreAPI.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -302,25 +276,6 @@ namespace TheatreAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TheatreAPI.Models.Ticket", b =>
-                {
-                    b.HasOne("TheatreAPI.Models.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TheatreAPI.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
 
                     b.Navigation("User");
                 });
