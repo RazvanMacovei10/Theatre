@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'play', component: PlaysComponent },
   { path: 'schedule/add', component: AddEventComponent },
   { path: 'play/add', component: AddPlayComponent },
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/theatre/play', pathMatch: 'full' },
 ];
 
 @NgModule({
