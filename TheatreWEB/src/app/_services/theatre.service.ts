@@ -20,6 +20,9 @@ export class TheatreService {
   getPlays(): Observable<Play[]> {
     return this.http.get<Play[]>(this.baseUrl + 'Play');
   }
+  deletePlay(id:number): Observable<Play[]> {
+    return this.http.delete<Play[]>(this.baseUrl + 'Play/'+id);
+  }
 
   addEvent(model: EventSent) {
     if(this.accountService.userValue!=null){

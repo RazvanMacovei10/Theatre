@@ -41,10 +41,12 @@
         <div class="col-sm-4"  *ngFor="let item of plays" style="margin-bottom: 2em">
           <div class="card main-card" >
             <img [src]="getImageUrl(item)" class="card-img card-img-top image-scale" alt="...">
-            <div class="card-body" style="padding:3em">
-                <h5 class="card-title">{{item.name}}</h5>
-                <p class="card-text">description: <strong>{{item.description}}</strong></p>
+            <div class="card-body">
+                <h2 class="card-title">{{item.name}}</h2>
+                <p class="card-text">Description: <strong>{{item.description}}</strong></p>
+                <p class="card-text">Type: <strong>{{item.type}}</strong></p>
                 <p class="card-text">Actors: <b>{{item.actors}}</b></p>
+                <button class="btn btn-danger" style="float:right" (click)="deletePlay(item.id)">Delete</button>
             </div>  
           </div>
         </div>

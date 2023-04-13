@@ -43,4 +43,7 @@ export class HomeComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + base64ImageData);
   }
 
+  deletePlay(id:number){
+    this.theatreService.deletePlay(id).subscribe(()=>{this.getPlays()});
+  }
 }

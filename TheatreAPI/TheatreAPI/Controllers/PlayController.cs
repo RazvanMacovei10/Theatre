@@ -34,6 +34,13 @@ namespace TheatreAPI.Controllers
             var plays = await _playBL.GetAllAsync();
             return plays;
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePlay(int id)
+        {
+            await _playBL.DeleteAsync(id);
+            return Ok();
+        }
     }
 
 }
