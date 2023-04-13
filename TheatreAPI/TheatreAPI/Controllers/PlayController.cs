@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheatreAPI.BusinessLogic;
+using TheatreAPI.DTOs;
 using TheatreAPI.IBusinessLogic;
 using TheatreAPI.Models;
 
@@ -11,23 +13,22 @@ namespace TheatreAPI.Controllers
     public class PlayController : ControllerBase
     {
         private readonly IPlayBL _playBL;
-        public PlayController(IPlayBL playBL)
+        private readonly IMapper _mapper;
+        public PlayController(IPlayBL playBL, IMapper mapper)
         {
             _playBL = playBL;
+            _mapper = mapper;
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Play play)
+        public async Task<IActionResult> Create([FromBody] PlayDTO playDTO)
         {
-            if (play == null)
-            {
-                return BadRequest();
-            }
+            Play play = _mapper.Map<Play>(playDTO);
 
             await _playBL.CreateAsync(play);
             return Ok();
         }
-        [HttpGet]
 
+        [HttpGet]
         public async Task<IList<Play>> GetPlays()
         {
             var plays = await _playBL.GetAllAsync();

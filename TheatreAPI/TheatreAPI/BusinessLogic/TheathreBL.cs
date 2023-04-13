@@ -10,5 +10,12 @@ namespace TheatreAPI.BusinessLogic
         {
 
         }
+
+        public async Task<Theatre> GetByUsername(string username)
+        {
+            var result = await (Repository as ITheathreRepository).GetByUsername(username);
+
+            return result;
+        }
     }
 }

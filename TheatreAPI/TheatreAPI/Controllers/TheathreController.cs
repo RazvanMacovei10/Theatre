@@ -23,14 +23,5 @@ namespace TheatreAPI.Controllers
             _playBL = playBL;
             _mapper = mapper;
         }
-        [HttpPost("play")]
-        public async Task<IActionResult> AddPlay(PlayDTO playDTO)
-        {
-
-            Play play = _mapper.Map<Play>(playDTO);
-
-            await _playBL.CreateAsync(play);
-            return Ok(play);
-        }
     }
 }
