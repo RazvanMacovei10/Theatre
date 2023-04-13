@@ -23,7 +23,7 @@ namespace TheatreAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] EventDTO eventDTO)
+        public async Task<IActionResult> Create([FromBody] EventSentDTO eventDTO)
         {
             Theatre theatre = await _theathreBL.GetByUsername(eventDTO.TheatreName);
             Event newEvent = _mapper.Map<Event>(eventDTO);
@@ -33,6 +33,14 @@ namespace TheatreAPI.Controllers
 
             await _eventBL.CreateAsync(newEvent);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEvents()
+        {
+            List<Event> forms = (List<Event>)await _eventBL.GetAllAsync("Theatre", "Play", "Theatre.User");
+            List<EventDTO> formsDTO = _mapper.Map<List<EventDTO>>(forms);
+            return Ok(formsDTO);
         }
     }
 }

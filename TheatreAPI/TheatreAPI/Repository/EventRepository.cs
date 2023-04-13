@@ -1,4 +1,5 @@
-﻿using TheatreAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TheatreAPI.Models;
 
 namespace TheatreAPI.Repository
 {
@@ -6,7 +7,6 @@ namespace TheatreAPI.Repository
     {
         public EventRepository(AppDbContext appDbContext):base(appDbContext)
         {
-
         }
     }
 }
