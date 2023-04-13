@@ -4,5 +4,5 @@ export interface Play{
     description:string,
     image:string,
     actors:string,
-    type:string,
+    type:string
 }

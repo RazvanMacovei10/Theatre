@@ -16,7 +16,8 @@ export class PlaysComponent implements OnInit {
   plays: Play[] = [];
   constructor(
     private sanitizer: DomSanitizer,
-    private theatreService: TheatreService
+    private theatreService: TheatreService,
+    private accountService:AccountService
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +25,8 @@ export class PlaysComponent implements OnInit {
   }
 
   getPlays() {
-    this.theatreService.getPlays().subscribe((data) => {
+    
+    this.theatreService.getPlaysByCurrentUser().subscribe((data) => {
       this.plays = data;
     });
   }

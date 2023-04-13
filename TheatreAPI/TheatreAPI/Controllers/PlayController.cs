@@ -14,16 +14,18 @@ namespace TheatreAPI.Controllers
     {
         private readonly IPlayBL _playBL;
         private readonly IMapper _mapper;
-        public PlayController(IPlayBL playBL, IMapper mapper)
+        private readonly ITheathreBL _theathreBL;
+        public PlayController(IPlayBL playBL, IMapper mapper,ITheathreBL theathreBL)
         {
             _playBL = playBL;
             _mapper = mapper;
+            _theathreBL = theathreBL;
         }
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PlayDTO playDTO)
+        [HttpPost("{name}")]
+        public async Task<IActionResult> Create([FromBody] PlayDTO playDTO,string name)
         {
             Play play = _mapper.Map<Play>(playDTO);
-
+            play.Theatre = await _theathreBL.GetByUsername(name);
             await _playBL.CreateAsync(play);
             return Ok();
         }

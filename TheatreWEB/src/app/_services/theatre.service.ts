@@ -18,8 +18,11 @@ export class TheatreService {
     private accountService: AccountService
   ) {}
   addPlay(model: any) {
-    console.log(model);
-    return this.http.post<Play>(this.baseUrl + 'Play', model);
+    let name="";
+    if (this.accountService.userValue != null) {
+      name = this.accountService.userValue.username;
+    }
+    return this.http.post<Play>(this.baseUrl + 'Play/'+name, model);
   }
   getPlays(): Observable<Play[]> {
     return this.http.get<Play[]>(this.baseUrl + 'Play');
@@ -46,6 +49,14 @@ export class TheatreService {
         this.baseUrl + 'Event/' + this.accountService.userValue.username
       );
     return this.http.get<Event[]>(this.baseUrl + 'Event');
+  }
+
+  getPlaysByCurrentUser(): Observable<Play[]> {
+    if (this.accountService.userValue != null)
+      return this.http.get<Play[]>(
+        this.baseUrl + 'Play/' + this.accountService.userValue.username
+      );
+    return this.http.get<Play[]>(this.baseUrl + 'Play');
   }
 
   deleteEvent(id: string) {
