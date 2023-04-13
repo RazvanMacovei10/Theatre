@@ -8,6 +8,8 @@
         public byte[] Image { get; set; }
         public string Type { get; set; }
         public string Actors { get; set; }
+        public int TheatreId { get; set; }
+        public Theatre Theatre { get; set; }
 
     }
 }

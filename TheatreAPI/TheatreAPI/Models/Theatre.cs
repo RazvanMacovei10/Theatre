@@ -10,5 +10,6 @@
         public int AddressId { get; set; }
         public Address Address { get; set; }
         public List<Event> Events { get; set; }
+        public List<Play> Plays { get; set; }
     }
 }

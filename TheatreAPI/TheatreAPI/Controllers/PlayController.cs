@@ -41,6 +41,16 @@ namespace TheatreAPI.Controllers
             await _playBL.DeleteAsync(id);
             return Ok();
         }
+
+
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetEventsByTheatreId(string name)
+        {
+            List<Play> plays = (List<Play>)await _playBL.GetAllAsync("Theatre", "Theatre.User");
+            plays = plays.Where(e => e.Theatre.User.Username == name).ToList();
+            List<PlayDTO> playsDTO = _mapper.Map<List<PlayDTO>>(plays);
+            return Ok(playsDTO);
+        }
     }
 
 }
