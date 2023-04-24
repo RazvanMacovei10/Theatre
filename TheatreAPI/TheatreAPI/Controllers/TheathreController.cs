@@ -23,5 +23,13 @@ namespace TheatreAPI.Controllers
             _playBL = playBL;
             _mapper = mapper;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTheathres()
+        {
+            List<Theatre> theatres = (List<Theatre>)await _theathreBL.GetAllAsync("User", "Address", "Events", "User.Role", "Events.Play");
+            List<TheathreDTO> theathresDTO = _mapper.Map<List<TheathreDTO>>(theatres);
+            return Ok(theathresDTO);
+        }
     }
 }

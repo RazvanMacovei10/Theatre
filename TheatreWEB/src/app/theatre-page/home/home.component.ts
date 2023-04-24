@@ -13,17 +13,9 @@ import { TheatreService } from 'src/app/_services/theatre.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn$: Observable<boolean> = new Observable<boolean>();
   constructor(
-    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn$ = this.accountService.currentUser$.pipe(
-      map((user) => !!user)
-    );
-  }
-  logout() {
-    this.accountService.logout();
   }
 }
