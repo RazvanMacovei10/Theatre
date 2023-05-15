@@ -10,7 +10,7 @@ import { RegisterForm } from '../_models/register-form';
 })
 export class AccountService {
 
-  baseUrl='https://localhost:7270/api/';
+  baseUrl = 'https://localhost:7270/api/';
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$=this.currentUserSource.asObservable();
 
