@@ -45,7 +45,7 @@ export class AddEventComponent implements OnInit {
   }
 
   getPlays() {
-    this.theatreService.getPlays().subscribe((data) => {
+    this.theatreService.getPlaysByCurrentUser().subscribe((data) => {
       this.plays = data;
     });
   }
